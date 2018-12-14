@@ -11,6 +11,13 @@ recursive_funct:
  sub $sp, $sp, 12           #alloocate 12B on stack
  sw $ra 0($sp)              #save return address
  sw $a0, 4($sp)             #save argument
+ 
+ exit_recursive_funct:
+    li $v0, 0               #check for anymore numbers, return 0
+    lw $ra, 0($sp)          #load return address
+    addi $sp, $sp, 12       #free up the stack
+    jr $ra                  #return
+    
   exit:
   li $v0, 10
    syscall
