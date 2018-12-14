@@ -6,6 +6,11 @@
   invalidInput: .asciiz "Invalid base-N number." # change n
   
   .text
+#recursive funtion to ask for all the funtions to continue
+recursive_funct:	 
+ sub $sp, $sp, 12           #alloocate 12B on stack
+ sw $ra 0($sp)              #save return address
+ sw $a0, 4($sp)             #save argument
   exit:
   li $v0, 10
    syscall
