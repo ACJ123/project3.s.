@@ -31,7 +31,14 @@ main:
  li $v1,5  
  slt $t1,$v1,$v0
  
- 
+ beq $t1,1,TooLong
+get_userInput: 
+ addi $sp, $sp, 4
+ sw $ra, 0($sp)
+ sw $a0, ($sp)
+ la $a0, userInput  
+ li $v0, 4
+ syscall
 delete_left_pad:
 	li $t8, 32 # this line will end up making a space
 	lb $t9, 0($a0)
