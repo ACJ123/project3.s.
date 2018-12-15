@@ -39,6 +39,13 @@ get_userInput:
  la $a0, userInput  
  li $v0, 4
  syscall
+ 
+ la $a0, input 
+ li $a1, 80
+ li $v0, 8
+ syscall
+ la $a0, input
+ 
 delete_left_pad:
 	li $t8, 32 # this line will end up making a space
 	lb $t9, 0($a0)
