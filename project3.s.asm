@@ -2,30 +2,11 @@
 .data
  emptyInput: .asciiz "Input is empty."
  longInput: .asciiz "Input is too long."
-  userInput: .space 500
+  userInput: .asciiz
   invalidInput: .asciiz "Invalid base-N number." # change n
   input: 	.space 80
   
   .text
-
-err_empty_input:
- la $a0, emptyInput
- li $v0, 4
- syscall
-  j exit
-
-err_invalid_input:
- la $a0, invalidInput
- li $v0, 4
- syscall
-  j exit
-
-err_long_input:
- la $a0, longInput
- li $v0, 4
- syscall
-  j exit
-
 main:
  jal get_userInput
  jal strlen 
@@ -66,6 +47,24 @@ end:
  move $v0, $t1	
  jr $ra
  
+err_empty_input:
+ la $a0, emptyInput
+ li $v0, 4
+ syscall
+  j exit
+
+err_invalid_input:
+ la $a0, invalidInput
+ li $v0, 4
+ syscall
+  j exit
+
+err_long_input:
+ la $a0, longInput
+ li $v0, 4
+ syscall
+  j exit
+  
 delete_left_pad:
 	li $t8, 32 # this line will end up making a space
 	lb $t9, 0($a0)
