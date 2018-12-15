@@ -2,7 +2,7 @@
 .data
  emptyInput: .asciiz "Input is empty."
  longInput: .asciiz "Input is too long."
-  userInput: .asciiz
+  userInput: .asciiz "Enter character, maximum value of 4: "
   invalidInput: .asciiz "Invalid base-N number." # change n
   input: 	.space 80
   
@@ -51,13 +51,13 @@ err_empty_input:
  la $a0, emptyInput
  li $v0, 4
  syscall
-  j exit
+ j exit
 
 err_invalid_input:
  la $a0, invalidInput
  li $v0, 4
  syscall
-  j exit
+ j exit
 
 err_long_input:
  la $a0, longInput
