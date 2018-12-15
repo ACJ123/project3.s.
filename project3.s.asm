@@ -11,6 +11,13 @@ recursive_funct:
  sub $sp, $sp, 12           #alloocate 12B on stack
  sw $ra 0($sp)              #save return address
  sw $a0, 4($sp)             #save argument
+ beq $a0, $0, exit_recursive_funct     #call recursion exit funct when there are no more numbers
+ jal main		    #main functionality of funct
+ jal recursive_funct	    #recursive call
+ lw $t0, 8($sp)             #read number from stack
+ lw $ra, 0($sp)             #load return address
+ addi $sp, $sp, 12          #free up the stack
+ 
  
  exit_recursive_funct:
     li $v0, 0               #check for anymore numbers, return 0
