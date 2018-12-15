@@ -6,29 +6,6 @@
   invalidInput: .asciiz "Invalid base-N number." # change n
   
   .text
-  
-  
-   
-#recursive funtion to ask for all the funtions to continue
-recursive_funct:	 
- sub $sp, $sp, 12           #alloocate 12B on stack
- sw $ra 0($sp)              #save return address
- sw $a0, 4($sp)             #save argument
- beq $a0, $0, exit_recursive_funct     #call recursion exit funct when there are no more numbers
- jal recursive_funct	    #recursive call
- lw $t0, 8($sp)             #read number from stack
- lw $ra, 0($sp)             #load return address
- addi $sp, $sp, 12          #free up the stack
- jr $ra                     #return
- 
- 
-exit_recursive_funct:
-    li $v0, 0               #check for anymore numbers, return 0
-    lw $ra, 0($sp)          #load return address
-    addi $sp, $sp, 12       #free up the stack
-    jr $ra                 #return
-    
-
 
 err_empty_input:
  la $a0, emptyInput
@@ -49,15 +26,12 @@ err_long_input:
   j exit
 
 main:
- li $v0, 8
- la $a0, userInput
- li $a1, 250
- jal recursive_funct
- move $a0, $v0              #set a0 = result of SumDigits
- syscall
- li $v0, 10                 #set $v0 for exit system call
- syscall
-
+ jal get_userInput
+ jal strlen 
+ li $v1,5  
+ slt $t1,$v1,$v0
+ 
+ 
 delete_left_pad:
 	li $t8, 32 # this line will end up making a space
 	lb $t9, 0($a0)
