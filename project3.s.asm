@@ -4,6 +4,7 @@
  longInput: .asciiz "Input is too long."
   userInput: .space 500
   invalidInput: .asciiz "Invalid base-N number." # change n
+  input: 	.space 80
   
   .text
 
@@ -31,7 +32,7 @@ main:
  li $v1,5  
  slt $t1,$v1,$v0
  
- beq $t1,1,TooLong
+ beq $t1,1,longInput
 get_userInput: 
  addi $sp, $sp, 4
  sw $ra, 0($sp)
@@ -45,6 +46,25 @@ get_userInput:
  li $v0, 8
  syscall
  la $a0, input
+ 
+ la $a0, input
+ move $a2, $a0   
+ li $v0, 4       
+ syscall			
+
+strlen:
+ move $t1, $zero
+ 
+loop:
+ lb   $a2,0($a0)
+ beqz $a2,end
+ addi $a0,$a0,1
+ addi $t1,$t1,1
+ j loop
+ 
+end:
+ move $v0, $t1	
+ jr $ra
  
 delete_left_pad:
 	li $t8, 32 # this line will end up making a space
