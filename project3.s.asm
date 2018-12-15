@@ -51,9 +51,12 @@ err_long_input:
 main:
  li $v0, 8
  la $a0, userInput
- jal recursive_funct
  li $a1, 250
-  syscall
+ jal recursive_funct
+ move $a0, $v0              #set a0 = result of SumDigits
+ syscall
+ li $v0, 10                 #set $v0 for exit system call
+ syscall
 
 delete_left_pad:
 	li $t8, 32 # this line will end up making a space
