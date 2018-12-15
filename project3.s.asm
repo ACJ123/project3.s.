@@ -17,6 +17,7 @@ recursive_funct:
  lw $t0, 8($sp)             #read number from stack
  lw $ra, 0($sp)             #load return address
  addi $sp, $sp, 12          #free up the stack
+ jr $ra                     #return
  
  
  exit_recursive_funct:
